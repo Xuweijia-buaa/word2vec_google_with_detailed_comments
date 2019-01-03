@@ -101,8 +101,10 @@ int main(int argc, char **argv)
       if (TCN == 0) TCN = 1;                                             //　 如果上一part TCN=＝0. 给TCN赋１
       if (QID != 0) {
         //printf("ACCURACY TOP1: %.2f %%  (%d / %d)\n", CCN / (float)TCN * 100, CCN, TCN);　　// 每一个小部分,命中的acc
-        printf("QID %d :ACCURACY TOP1: %.2f %%  (%d / %d)\n", QID,CCN / (float)TCN * 100, CCN, TCN);// add Qid,avoid zero
-        if (TACN==0) TACN=1;CACN=0;
+        printf("QID %d :ACCURACY TOP1: %.2f %%  (%d / %d)\n", QID,CCN / (float)TCN * 100, CCN, TCN);// add Qid
+        if (TACN==0) {TACN=1;CACN=0;} //self-add ,avoid zero
+        if (SECN == 0) {SECN=1;SEAC=0;}
+        if (SYCN == 0) {SYCN=1;SYAC=0;}
         //　存在的词组中　，预测正确的/总的　　不分sem,sys  /   　 SEAC / SECN　　　/   SYAC / SYCN
         printf("Total accuracy: %.2f %%   Semantic accuracy: %.2f %%   Syntactic accuracy: %.2f %% \n", CACN / (float)TACN * 100, SEAC / (float)SECN * 100, SYAC / (float)SYCN * 100);
       }
